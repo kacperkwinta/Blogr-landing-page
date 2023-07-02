@@ -1,16 +1,14 @@
 "use strict";
 
 // dropdown
-document.querySelector("body").addEventListener("click", function (e) {
+document.addEventListener("click", (e) => {
 	const isDropdownButton = e.target.matches("[data-dropdown-button]");
-	if (!isDropdownButton && e.target.closest("[data-dropdown]")) return;
+	if (!isDropdownButton && e.target.closest("[data-dropdown]") != null) return;
 
 	let currentDropdown;
-
 	if (isDropdownButton) {
 		currentDropdown = e.target.closest("[data-dropdown]");
-        currentDropdown.classList.toggle("active");
-        console.log('clicked');
+		currentDropdown.classList.toggle("active");
 	}
 
 	document.querySelectorAll("[data-dropdown].active").forEach((dropdown) => {
@@ -29,19 +27,4 @@ mobileMenuBtn.addEventListener("click", function () {
 	navContainer.classList.toggle("visible");
 	mobileMenuHamburger.classList.toggle("hidden");
 	mobileMenuClose.classList.toggle("hidden");
-});
-
-// change arrow icons in mobile menu
-window.addEventListener("resize", function () {
-	if (window.innerWidth <= 900) {
-		const images = document.querySelectorAll(".nav-dropdown-arrow");
-		images.forEach(function (image) {
-			image.src = "images/icon-arrow-dark.svg";
-		});
-	} else {
-		const images = document.querySelectorAll(".nav-dropdown-arrow");
-		images.forEach(function (image) {
-			image.src = "images/icon-arrow-light.svg";
-		});
-	}
 });
