@@ -15,6 +15,48 @@ $color-gradient-2: hsl(353, 100%, 62%);
 $color-gradient-3: hsl(237, 17%, 21%);
 $color-gradient-4: hsl(237, 23%, 32%);
 
+////////////////////////////////////
+/// MIXINS
+////////////////////////////////////
+@mixin flex($justify, $align) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin respond($breakpoint) {
+    @if $breakpoint ==phone {
+        @media only screen and (max-width: 37.5em) {
+            // 600px
+            @content;
+        }
+    }
+
+    @if $breakpoint ==tab-port {
+        @media only screen and (max-width: 56.25em) {
+            // 900px
+            @content;
+        }
+    }
+
+    @if $breakpoint ==tab-land {
+        @media only screen and (max-width: 75em) {
+            // 1200px
+            @content;
+        }
+    }
+
+    @if $breakpoint ==big-desktop {
+        @media only screen and (min-width: 112.5em) {
+            // 1800px
+            @content;
+        }
+    }
+}
+
+////////////////////////////////////
+/// GLOBAL
+////////////////////////////////////
 * {
     padding: 0;
     margin: 0;
@@ -30,4 +72,167 @@ html {
 
 body {
     font-size: 1.6rem;
+}
+
+////////////////////////////////////
+/// NAVIGATION
+////////////////////////////////////
+nav {
+    @include flex(center, center);
+    padding: 2.4rem 15vw;
+
+    @include respond(tab-port) {
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 2.4rem 5vw;
+    }
+}
+
+.logo {
+    margin-right: 4.8rem;
+
+    @include respond(tab-port) {
+        order: 1;
+    }
+}
+
+.nav-container {
+    transition: all 0.3s ease;
+    @include flex(space-between, center);
+    flex: 1;
+
+    @include respond(tab-port) {
+        opacity: 0;
+        pointer-events: none;
+
+        background-color: $color-neutral-1;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        border-radius: 4px;
+        padding: 2.4rem 0;
+        margin-top: 2.4rem !important;
+        flex-direction: column;
+        flex-basis: 100%;
+        gap: 2.4rem;
+        margin: 0 auto;
+        order: 3;
+    }
+}
+
+nav .wrapper {
+    @include flex(center, center);
+    gap: 2.4rem;
+
+    @include respond(tab-port) {
+        flex-direction: column;
+    }
+}
+
+nav button {
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    color: lighten($color-neutral-2, 14);
+    font-size: 1.6rem;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    word-spacing: 0.6rem;
+    transition: all 0.3s ease;
+
+    @include respond(tab-port) {
+        color: $color-neutral-4;
+    }
+}
+
+// ROTATE ARROW IN NAV WHEN BUTTON IS FOCUSED
+.nav-dropdown-arrow {
+    transition: all 0.3s ease;
+}
+
+nav button:focus {
+    color: $color-neutral-1;
+
+    .nav-dropdown-arrow {
+        transform: rotate(180deg);
+    }
+}
+
+nav a:link,
+nav a:visited {
+    text-decoration: none;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown .dropdown-menu {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 1rem);
+
+    background-color: $color-neutral-1;
+    padding: 3.2rem 2.4rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+    transform: translateY(-1rem);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+
+    @include flex(center, flex-start);
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.dropdown>button:focus+.dropdown-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+////////////////////////////////////
+/// MOBILE NAVIGATION
+////////////////////////////////////
+.mobile-nav-btn {
+    display: none;
+
+    @include respond(tab-port) {
+        display: block;
+        order: 2;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: unset;
+}
+
+.no-visible {
+    opacity: 0;
+    user-select: none;
+}
+
+.visible {
+    opacity: 1;
+    user-select: all;
+}
+
+////////////////////////////////////
+/// HEADER
+////////////////////////////////////
+header {
+    height: 70vh;
+    background: url(../images/bg-pattern-intro-desktop.svg) no-repeat no-repeat 25% 50%,
+        linear-gradient(to right, $color-gradient-1, $color-gradient-2);
+    border-bottom-left-radius: 10rem;
+    border-bottom-right-radius: 10rem;
+
+    @include respond(tab-port) {
+        background: url(../images/bg-pattern-intro-mobile.svg) no-repeat no-repeat center,
+            linear-gradient(to right, $color-gradient-1, $color-gradient-2);
+    }
 }
