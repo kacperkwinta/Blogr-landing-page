@@ -66,8 +66,13 @@ $color-gradient-4: hsl(237, 23%, 32%);
 html {
 	font-size: 62.5%;
 	box-sizing: border-box;
+	scroll-behavior: smooth;
 	// font-family: 'Overpass', sans-serif;
 	// font-family: 'Ubuntu', sans-serif;
+
+	@include respond(tab-port) {
+		font-size: 50%;
+	}
 }
 
 body {
@@ -110,7 +115,7 @@ nav {
 		transform: translateY(-1rem);
 		background-color: $color-neutral-1;
 		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-		border-radius: 4px;
+		border-radius: 1rem;
 		padding: 2.4rem;
 		margin-top: 2.4rem !important;
 		flex-direction: column;
@@ -134,19 +139,20 @@ nav .wrapper {
 	}
 }
 
+.link,
 nav button {
 	cursor: pointer;
 	border: none;
 	border-radius: 0;
 	background-color: transparent;
-	color: lighten($color-neutral-2, 14);
+	color: lighten($color-neutral-2, 14) !important;
 	font-size: 1.6rem;
 	font-weight: 700;
 	word-spacing: 0.6rem;
 	transition: all 0.3s ease;
 
 	@include respond(tab-port) {
-		color: $color-neutral-4;
+		color: $color-neutral-4 !important;
 	}
 }
 
@@ -253,6 +259,14 @@ nav a {
 	}
 }
 
+.nav-container .wrapper:nth-child(2) {
+	@include respond(tab-port) {
+		width: 100%;
+		padding-top: 2.4rem;
+		border-top: 1px solid #e9ecef;
+	}
+}
+
 .hidden {
 	display: none;
 }
@@ -277,4 +291,81 @@ header {
 				center,
 			linear-gradient(to right, $color-gradient-1, $color-gradient-2);
 	}
+}
+
+////////////////////////////////////
+/// CTA (IN HEADER)
+////////////////////////////////////
+.cta {
+	padding: 12.6rem 0;
+	text-align: center;
+
+	@include respond(tab-port) {
+		padding-top: 0;
+	}
+
+	.wrapper {
+		margin-top: 4.8rem;
+
+		@include flex(center, center);
+		gap: 1.6rem;
+	}
+}
+
+////////////////////////////////////
+/// TYPOGRAPHY
+////////////////////////////////////
+
+.btn {
+	transition: all 0.3s ease;
+	display: inline-block;
+	padding: 1.6rem 3.4rem;
+	border-radius: 100rem;
+	text-decoration: none;
+	font-weight: 700;
+	font-family: "Ubuntu", sans-serif;
+}
+
+.btn--outline {
+	border: 1px solid $color-neutral-1;
+	color: $color-neutral-1;
+
+	&:hover {
+		background-color: $color-neutral-1;
+		color: $color-gradient-2;
+	}
+}
+
+.btn.btn--white {
+	background-color: $color-neutral-1;
+	color: $color-gradient-2;
+
+	&:hover {
+		background-color: lighten($color-primary-1, 15);
+		color: $color-neutral-1;
+	}
+}
+
+.btn.btn--gradient {
+	@include respond(tab-port) {
+		background: linear-gradient(to right, $color-gradient-1, $color-gradient-2);
+		color: $color-neutral-1;
+	}
+}
+
+.heading-1 {
+	font-family: "Overpass", sans-serif;
+	font-size: 6.4rem;
+	color: $color-neutral-1;
+	margin-bottom: 2.4rem;
+}
+
+.paragraph {
+	line-height: 1.6;
+	font-family: "Overpass", sans-serif;
+	font-size: 1.8rem;
+}
+
+.paragraph--white {
+	color: lighten($color-neutral-2, 14);
 }
