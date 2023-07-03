@@ -84,13 +84,15 @@ body {
 ////////////////////////////////////
 nav {
 	@include flex(center, center);
-	padding: 2.4rem 15vw;
+
+	position: relative;
+	padding: 3.2rem 15vw;
 	font-family: "Ubuntu", sans-serif;
 
 	@include respond(tab-port) {
 		justify-content: space-between;
 		flex-wrap: wrap;
-		padding: 2.4rem 5vw;
+		padding: 3.2rem 5vw;
 	}
 }
 
@@ -111,15 +113,17 @@ nav {
 		opacity: 0;
 		pointer-events: none;
 
+		position: absolute;
+		top: 100%;
+		left: 5%;
+		width: 90%;
 		transition: all 0.3s ease;
 		transform: translateY(-1rem);
 		background-color: $color-neutral-1;
 		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 		border-radius: 1rem;
 		padding: 2.4rem;
-		margin-top: 2.4rem !important;
 		flex-direction: column;
-		flex-basis: 100%;
 		gap: 2.4rem;
 		margin: 0 auto;
 		order: 3;
@@ -220,6 +224,7 @@ nav a {
 		color: $color-neutral-2;
 		align-items: center;
 		margin-top: 2.4rem !important;
+		width: 100%;
 	}
 }
 
@@ -287,6 +292,7 @@ header {
 	border-bottom-right-radius: 10rem;
 
 	@include respond(tab-port) {
+		border-bottom-right-radius: 0rem;
 		background: url(../images/bg-pattern-intro-mobile.svg) no-repeat no-repeat
 				center,
 			linear-gradient(to right, $color-gradient-1, $color-gradient-2);
@@ -299,10 +305,6 @@ header {
 .cta {
 	padding: 12.6rem 0;
 	text-align: center;
-
-	@include respond(tab-port) {
-		padding-top: 0;
-	}
 
 	.wrapper {
 		margin-top: 4.8rem;
